@@ -1,6 +1,12 @@
 Moodle block for providing links into EQUELLA 
 =============
 
+Installation
+------------
+- Unzip the archive
+- Rename the folder to "equella_links"
+- Copy "equella_links" folder to {$MOODLE}/blocks/ 
+
 Requirements
 ------------
 
