@@ -1,5 +1,5 @@
 <?php
-// This file is part of the EQUELLA Moodle Integration - https://github.com/equella/moodle-block-tasks
+// This file is part of the EQUELLA Moodle Integration - https://github.com/equella/moodle-block-links
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -29,5 +29,16 @@ $capabilities = array(
         ),
 
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
+    ),
+
+    'block/equella_links:manageanylinks' => array(
+
+        'riskbitmask' => RISK_SPAM,
+
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'manager' => CAP_ALLOW
+        )
     ),
 );

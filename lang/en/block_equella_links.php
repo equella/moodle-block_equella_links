@@ -16,5 +16,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 $string['pluginname'] = 'EQUELLA Links';
+$string['searchlink'] = 'Search';
+$string['myresourceslink'] = 'My Resources';
+$string['contributelink'] = 'Contribute';
+$string['links'] = 'Links';
 
-?>
+$string['config.title'] = 'EQUELLA links settings';
+
+$string['linksaddedit'] = 'Manage links';
+
+$string['addinglinkheader'] = 'Adding link';
+$string['editinglinkheader'] = 'Editing link';
+$string['linktitle'] = 'Title';
+$string['equellaurl'] = 'EQUELLA URL';
+
+$string['addnewlink'] = 'Add a new EQUELLA link';
+$string['equella_links:manageanylinks'] = 'Manage EQUELLA links';
+$string['deletelinkconfirm'] = 'Are you sure you want to delete this EQUELLA link?';

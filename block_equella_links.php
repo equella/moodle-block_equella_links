@@ -23,8 +23,12 @@ class block_equella_links extends block_list {
         $this->title = get_string('pluginname', 'block_equella_links');
     }
 
+    function instance_allow_multiple() {
+        return false;
+    }
+
     function get_content() {
-        global $CFG, $COURSE, $SESSION;
+        global $CFG, $COURSE, $OUTPUT, $DB;
 
         if( $this->content !== NULL ) {
             return $this->content;
@@ -39,17 +43,25 @@ class block_equella_links extends block_list {
                 $this->instance->pageid = $COURSE->id;
             }
         }
-
+        $links = $DB->get_records('block_equella_links');
         $items = array();
-        $items[]= '<a target="_blank" href="'.equella_appendtoken(equella_full_url('/access/search.do')).'">Search</a>';
-        $items[]= '<a target="_blank" href="'.equella_appendtoken(equella_full_url('/access/contribute.do')).'">Contribute</a>';
-        $items[]= '<a target="_blank" href="'.equella_appendtoken(equella_full_url('/access/myresources.do')).'">My Resources</a>';
-        
+        foreach ($links as $link) {
+            $items[] = html_writer::link(new moodle_url(equella_appendtoken(equella_full_url(ltrim($link->url, '/')))), $link->title, array('target'=>'_blank'));
+        }
+
         $this->content = new stdClass;
         $this->content->items = $items;
         $this->content->icons = array();
-        $this->content->footer = '';
+
+        if (has_any_capability(array('block/equella_links:manageanylinks'), $this->context)) {
+            $url = new moodle_url('/blocks/equella_links/managelinks.php', array('courseid'=>$this->page->course->id));
+            $this->content->footer = $OUTPUT->action_icon($url, new pix_icon('t/edit', get_string('edit')));
+        }
 
         return $this->content;
+    }
+
+    function instance_allow_config() {
+        return true;
     }
 }
