@@ -51,6 +51,8 @@ if ($formdata = $mform->get_data()) {
         $addinglink = new stdClass;
         $addinglink->title = $formdata->title;
         $addinglink->url   = $formdata->url;
+        $addinglink->created = time();
+        $addinglink->tagged  = 0;
         $DB->insert_record('block_equella_links', $addinglink);
     }
     redirect($baseurl);

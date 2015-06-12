@@ -26,6 +26,7 @@ class equella_links_edit_form extends moodleform {
         }
 
         $mform->addElement('hidden', 'linkid', '');
+        $mform->setType('linkid', PARAM_INT);
 
         $mform->addElement('text', 'title', get_string('linktitle', 'block_equella_links'), array('size' => 60));
         $mform->setType('title', PARAM_NOTAGS);

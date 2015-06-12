@@ -24,5 +24,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2013112806;
+$plugin->version = 2015061101;
 $plugin->component = 'block_equella_links'; // Full name of the plugin (used for diagnostics)

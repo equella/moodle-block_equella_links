@@ -33,3 +33,6 @@ $string['equellaurl'] = 'EQUELLA URL';
 $string['addnewlink'] = 'Add a new EQUELLA link';
 $string['equella_links:manageanylinks'] = 'Manage EQUELLA links';
 $string['deletelinkconfirm'] = 'Are you sure you want to delete this EQUELLA link?';
+
+$string['configincludetaggeditems'] = 'Content tagged to this course (inc. eReadings)';
+$string['configxmlpath'] = 'XML Path (your EQ admin can provide)';

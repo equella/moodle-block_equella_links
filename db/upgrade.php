@@ -62,5 +62,34 @@ function xmldb_block_equella_links_upgrade($oldversion, $block) {
         upgrade_block_savepoint(true, 2013112806, 'equella_links');
     }
 
+    if ($oldversion < 2015061101) {
+        // Define field created to be added to block_equella_links.
+        $table = new xmldb_table('block_equella_links');
+        $field = new xmldb_field('created', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'contextid');
+
+        // Conditionally launch add field created.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        $field = new xmldb_field('tagged', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'created');
+
+        // Conditionally launch add field tagged.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field itemxml to be added to block_equella_links.
+        $table = new xmldb_table('block_equella_links');
+        $field = new xmldb_field('itemxml', XMLDB_TYPE_TEXT, null, null, null, null, null, 'contextid');
+
+        // Conditionally launch add field itemxml.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Equella_links savepoint reached.
+        upgrade_block_savepoint(true, 2015061101, 'equella_links');
+    }
     return true;
 }
