@@ -62,10 +62,17 @@ function xmldb_block_equella_links_upgrade($oldversion, $block) {
         upgrade_block_savepoint(true, 2013112806, 'equella_links');
     }
 
-    if ($oldversion < 2015061101) {
+    if ($oldversion < 2015061200) {
         // Define field created to be added to block_equella_links.
         $table = new xmldb_table('block_equella_links');
-        $field = new xmldb_field('created', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'contextid');
+
+        $field = new xmldb_field('blockid', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'contextid');
+
+        // Conditionally launch add field blockid.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        $field = new xmldb_field('created', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'blockid');
 
         // Conditionally launch add field created.
         if (!$dbman->field_exists($table, $field)) {
@@ -79,9 +86,7 @@ function xmldb_block_equella_links_upgrade($oldversion, $block) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field itemxml to be added to block_equella_links.
-        $table = new xmldb_table('block_equella_links');
-        $field = new xmldb_field('itemxml', XMLDB_TYPE_TEXT, null, null, null, null, null, 'contextid');
+        $field = new xmldb_field('itemxml', XMLDB_TYPE_TEXT, null, null, null, null, null, 'tagged');
 
         // Conditionally launch add field itemxml.
         if (!$dbman->field_exists($table, $field)) {
@@ -89,7 +94,7 @@ function xmldb_block_equella_links_upgrade($oldversion, $block) {
         }
 
         // Equella_links savepoint reached.
-        upgrade_block_savepoint(true, 2015061101, 'equella_links');
+        upgrade_block_savepoint(true, 2015061200, 'equella_links');
     }
     return true;
 }
