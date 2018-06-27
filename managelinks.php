@@ -21,12 +21,11 @@ $PAGE->set_heading(get_string('linksaddedit', 'block_equella_links'));
 require_capability('block/equella_links:manageanylinks', $context);
 
 
-
 if (!empty($action)) {
-    $link = $DB->get_record('block_equella_links', array('id' => $linkid), '*', MUST_EXIST);
+    $link = $DB->get_record('block_equella_links', array('id' => $linkid, 'contextid'=>$context->id), '*', MUST_EXIST);
     if ($action == 'edit') {
         $mform = new equella_links_edit_form($PAGE->url, false);
-        $mform->set_data(array('title'=>$link->title, 'url'=>$link->url, 'linkid'=>$link->id));
+        $mform->set_data(array('title'=>$link->title, 'url'=>$link->url, 'linkid'=>$link->id, 'contextid'=>$context->id));
     } else if ($action == 'delete') {
         $DB->delete_records('block_equella_links', array('id' => $linkid));
         // we are done here
@@ -46,6 +45,7 @@ if ($formdata = $mform->get_data()) {
         $editinglink->id = $formdata->linkid;
         $editinglink->title = $formdata->title;
         $editinglink->url   = $formdata->url;
+        $editinglink->contextid  = $context->id;
         $DB->update_record('block_equella_links', $editinglink);
     } else {
         $addinglink = new stdClass;
@@ -53,6 +53,7 @@ if ($formdata = $mform->get_data()) {
         $addinglink->url   = $formdata->url;
         $addinglink->created = time();
         $addinglink->tagged  = 0;
+        $addinglink->contextid  = $context->id;
         $DB->insert_record('block_equella_links', $addinglink);
     }
     redirect($baseurl);
@@ -69,7 +70,7 @@ $table->set_attribute('cellspacing', '0');
 $table->set_attribute('class', 'generaltable generalbox');
 
 $table->setup();
-$links = $DB->get_records('block_equella_links');
+$links = $DB->get_records('block_equella_links', array('contextid'=>$context->id));
 foreach ($links as $link) {
     $editurl = new moodle_url('/blocks/equella_links/managelinks.php', array('linkid'=>$link->id, 'action'=>'edit', 'courseid'=>$courseid));
     $editaction = $OUTPUT->action_icon($editurl, new pix_icon('t/edit', get_string('edit')));
