@@ -15,24 +15,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-$string['pluginname'] = 'EQUELLA Links';
+$string['pluginname'] = 'openEQUELLA Links';
 $string['searchlink'] = 'Search';
 $string['myresourceslink'] = 'My Resources';
 $string['contributelink'] = 'Contribute';
 $string['links'] = 'Links';
 
-$string['config.title'] = 'EQUELLA links settings';
+$string['config.title'] = 'openEQUELLA links settings';
 
 $string['linksaddedit'] = 'Manage links';
 
 $string['addinglinkheader'] = 'Adding link';
 $string['editinglinkheader'] = 'Editing link';
 $string['linktitle'] = 'Title';
-$string['equellaurl'] = 'EQUELLA URL';
+$string['equellaurl'] = 'openEQUELLA URL';
 
-$string['addnewlink'] = 'Add a new EQUELLA link';
-$string['equella_links:manageanylinks'] = 'Manage EQUELLA links';
-$string['deletelinkconfirm'] = 'Are you sure you want to delete this EQUELLA link?';
+$string['addnewlink'] = 'Add a new openEQUELLA link';
+$string['equella_links:manageanylinks'] = 'Manage openEQUELLA links';
+$string['deletelinkconfirm'] = 'Are you sure you want to delete this openEQUELLA link?';
 
 $string['configincludetaggeditems'] = 'Content tagged to this course (inc. eReadings)';
 $string['configxmlpath'] = 'XML Path (your EQ admin can provide)';
