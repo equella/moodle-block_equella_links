@@ -46,7 +46,7 @@ class block_equella_links extends block_list {
         $contextid = $context->id;
         $DB->delete_records('block_equella_links', array('contextid'=>$contextid, 'tagged'=>1));
         if (!empty($data->includetaggeditems) && !empty($idnumber)) {
-            $xml = self::grab_tagged_items(filter_var($data->xmlpath, FILTER_SANITIZE_STRING), $idnumber);
+            $xml = self::grab_tagged_items($data->xmlpath, $idnumber);
             self::update_records_from_xml($xml, $this->instance->id, $contextid);
         }
 
@@ -88,7 +88,7 @@ class block_equella_links extends block_list {
         $this->content->icons = array();
 
         if (has_any_capability(array('block/equella_links:manageanylinks'), $this->context)) {
-            $url = new moodle_url('/blocks/equella_links/managelinks.php', array('courseid'=>$this->page->course->id, 'sesskey' => sesskey()));
+            $url = new moodle_url('/blocks/equella_links/managelinks.php', array('courseid'=>$this->page->course->id));
             $this->content->footer = $OUTPUT->action_icon($url, new pix_icon('t/edit', get_string('edit')));
         }
 

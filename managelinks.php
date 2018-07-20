@@ -9,7 +9,7 @@ $courseid = required_param('courseid', PARAM_INT);
 $action = optional_param('action', '', PARAM_ALPHA);
 $linkid = optional_param('linkid', '', PARAM_INT);
 
-$baseurl = new moodle_url('/blocks/equella_links/managelinks.php', array('courseid'=>$courseid, 'sesskey' => sesskey()));
+$baseurl = new moodle_url('/blocks/equella_links/managelinks.php', array('courseid'=>$courseid));
 $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 $context = context_course::instance($courseid);
 
@@ -19,7 +19,7 @@ $PAGE->set_pagelayout('standard');
 $PAGE->set_heading(get_string('linksaddedit', 'block_equella_links'));
 
 require_capability('block/equella_links:manageanylinks', $context);
-require_sesskey();
+
 
 if (!empty($action)) {
     $link = $DB->get_record('block_equella_links', array('id' => $linkid, 'contextid'=>$context->id), '*', MUST_EXIST);
@@ -42,16 +42,17 @@ if ($mform->is_cancelled()) {
 if ($formdata = $mform->get_data()) {
     if (!empty($formdata->linkid)) {
         $editinglink = new stdClass;
-        $editinglink->id = filter_var($formdata->linkid, FILTER_SANITIZE_STRING);
-        $editinglink->title = filter_var($formdata->title, FILTER_SANITIZE_STRING);
-        $editinglink->url   = filter_var($formdata->url, FILTER_SANITIZE_URL);
+        $editinglink->id = $formdata->linkid;
+        $editinglink->title = $formdata->title;
+        $editinglink->url   = $formdata->url;
         $editinglink->contextid  = $context->id;
         $DB->update_record('block_equella_links', $editinglink);
     } else {
         $addinglink = new stdClass;
-        $addinglink->title = filter_var($formdata->title, FILTER_SANITIZE_STRING);
-        $addinglink->url   = filter_var($formdata->url, FILTER_SANITIZE_URL);
+        $addinglink->title = $formdata->title;
+        $addinglink->url   = $formdata->url;
         $addinglink->created = time();
+        $addinglink->tagged  = 0;
         $addinglink->contextid  = $context->id;
         $DB->insert_record('block_equella_links', $addinglink);
     }
@@ -71,10 +72,10 @@ $table->set_attribute('class', 'generaltable generalbox');
 $table->setup();
 $links = $DB->get_records('block_equella_links', array('contextid'=>$context->id));
 foreach ($links as $link) {
-    $editurl = new moodle_url('/blocks/equella_links/managelinks.php', array('linkid'=>$link->id, 'action'=>'edit', 'courseid'=>$courseid, 'sesskey' => sesskey()));
+    $editurl = new moodle_url('/blocks/equella_links/managelinks.php', array('linkid'=>$link->id, 'action'=>'edit', 'courseid'=>$courseid));
     $editaction = $OUTPUT->action_icon($editurl, new pix_icon('t/edit', get_string('edit')));
 
-    $deleteurl = new moodle_url('/blocks/equella_links/managelinks.php', array('linkid'=>$link->id, 'action'=>'delete', 'courseid'=>$courseid, 'sesskey' => sesskey()));
+    $deleteurl = new moodle_url('/blocks/equella_links/managelinks.php', array('linkid'=>$link->id, 'action'=>'delete', 'courseid'=>$courseid));
     $deleteicon = new pix_icon('t/delete', get_string('delete'));
     $deleteaction = $OUTPUT->action_icon($deleteurl, $deleteicon, new confirm_action(get_string('deletelinkconfirm', 'block_equella_links')));
     $action = $editaction . ' ' . $deleteaction;
