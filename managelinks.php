@@ -42,15 +42,15 @@ if ($mform->is_cancelled()) {
 if ($formdata = $mform->get_data()) {
     if (!empty($formdata->linkid)) {
         $editinglink = new stdClass;
-        $editinglink->id = filter_var($formdata->linkid, FILTER_SANITIZE_STRING);
-        $editinglink->title = filter_var($formdata->title, FILTER_SANITIZE_STRING);
-        $editinglink->url   = filter_var($formdata->url, FILTER_SANITIZE_URL);
+        $editinglink->id = $formdata->linkid;
+        $editinglink->title = $formdata->title;
+        $editinglink->url   = $formdata->url
         $editinglink->contextid  = $context->id;
         $DB->update_record('block_equella_links', $editinglink);
     } else {
         $addinglink = new stdClass;
-        $addinglink->title = filter_var($formdata->title, FILTER_SANITIZE_STRING);
-        $addinglink->url   = filter_var($formdata->url, FILTER_SANITIZE_URL);
+        $addinglink->title = $formdata->title;
+        $addinglink->url   = $formdata->url;
         $addinglink->created = time();
         $addinglink->contextid  = $context->id;
         $DB->insert_record('block_equella_links', $addinglink);
