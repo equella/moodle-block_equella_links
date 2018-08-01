@@ -44,7 +44,7 @@ if ($formdata = $mform->get_data()) {
         $editinglink = new stdClass;
         $editinglink->id = $formdata->linkid;
         $editinglink->title = $formdata->title;
-        $editinglink->url   = $formdata->url
+        $editinglink->url   = $formdata->url;
         $editinglink->contextid  = $context->id;
         $DB->update_record('block_equella_links', $editinglink);
     } else {
