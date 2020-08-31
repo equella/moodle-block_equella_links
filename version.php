@@ -24,6 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2015061200;
+$plugin->version = 2020032500;
 $plugin->component = 'block_equella_links'; // Full name of the plugin (used for diagnostics)
 $plugin->cron      = 86400;                 // Set min time between cron executions to 24 hours
+$plugin->release = "1.0.0";
