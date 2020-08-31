@@ -36,3 +36,4 @@ $string['deletelinkconfirm'] = 'Are you sure you want to delete this openEQUELLA
 
 $string['configincludetaggeditems'] = 'Content tagged to this course (inc. eReadings)';
 $string['configxmlpath'] = 'XML Path (your EQ admin can provide)';
+$string['privacy:metadata'] = "This block does not store any data.";
