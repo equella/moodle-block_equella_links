@@ -23,7 +23,7 @@ require_once($CFG->dirroot.'/blocks/moodleblock.class.php');
 
 class block_equella_links extends block_list {
     function has_config() {
-        return true;
+        return false;
     }
 
     public function instance_allow_config() {
